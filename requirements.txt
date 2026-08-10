@@ -1,0 +1,16 @@
+adafruit-circuitpython-pca9685>=3.4.0
+adafruit-circuitpython-motor>=3.4.0
+adafruit-blinka>=8.0.0
+RPi.GPIO>=0.7.1
+picamera2>=0.3.12
+pygame>=2.5.0
+numpy>=1.24.0
+PyYAML>=6.0
+requests>=2.31.0
+websockets>=12.0
+mcp>=1.0.0
+anthropic>=0.34.0
+openai>=1.40.0
+Pillow>=10.0.0
+pyserial>=3.5
+aiohttp>=3.9.0
