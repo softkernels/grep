@@ -1,0 +1,69 @@
+grep:
+  name: grep
+  log_level: INFO
+
+servo:
+  i2c_bus: 1
+  i2c_address: 0x40
+  pwm_frequency: 50
+  arms:
+    left:
+      shoulder_channel: 0
+      claw_channel: 1
+      shoulder_min: 0
+      shoulder_max: 180
+      claw_min: 20
+      claw_max: 90
+    right:
+      shoulder_channel: 2
+      claw_channel: 3
+      shoulder_min: 0
+      shoulder_max: 180
+      claw_min: 20
+      claw_max: 90
+  uart_port: /dev/ttyUSB0
+  uart_baud: 115200
+  move_delay: 0.02
+  jitter_threshold: 2
+
+camera:
+  resolution: [1920, 1080]
+  format: jpeg
+  quality: 85
+  autofocus: true
+  tuning: noir
+
+sensor:
+  gpio_pin: 17
+  adc_channel: 0
+  min_distance: 10
+  max_distance: 80
+  sample_rate: 10
+  samples_avg: 3
+
+face:
+  display: ":0"
+  width: 1024
+  height: 600
+  fps: 30
+  background: [0, 0, 0]
+  eye_color: [0, 255, 100]
+  mouth_color: [0, 255, 100]
+  idle_blink_interval: 4.0
+
+voice:
+  provider: elevenlabs
+  voice_id: N2lVS1w4EtoT3dr4eOWO
+  model: eleven_turbo_v2
+  cache_dir: cache/wav
+  api_key_env: ELEVENLABS_API_KEY
+
+memory:
+  db_path: logs/memory.db
+  max_transmissions: 1000
+  context_window: 20
+
+mcp:
+  host: 0.0.0.0
+  port: 8765
+  log_tools: true
