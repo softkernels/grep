@@ -95,3 +95,13 @@ class ServoController:
             self.pwm.deinit()
         if self._uart:
             self._uart.close()
+
+    def get_all_angles(self) -> dict:
+        return dict(self._last_angles)
+
+    def park(self):
+        """move arms to folded/park position"""
+        self.move("left", "shoulder", 45)
+        self.move("left", "claw", 20)
+        self.move("right", "shoulder", 135)
+        self.move("right", "claw", 20)
