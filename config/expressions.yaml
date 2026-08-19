@@ -1,0 +1,96 @@
+expressions:
+  idle:
+    eyes:
+      shape: circle
+      radius: 40
+      pupil_radius: 15
+      blink: true
+    mouth:
+      type: oscilloscope
+      amplitude: 10
+      frequency: 0.5
+      points: 64
+
+  alert:
+    eyes:
+      shape: circle
+      radius: 50
+      pupil_radius: 20
+      blink: false
+    mouth:
+      type: oscilloscope
+      amplitude: 20
+      frequency: 2.0
+      points: 64
+
+  curious:
+    eyes:
+      shape: circle
+      radius: 45
+      pupil_radius: 18
+      blink: true
+      offset_y: -5
+    mouth:
+      type: oscilloscope
+      amplitude: 8
+      frequency: 1.0
+      points: 64
+
+  speaking:
+    eyes:
+      shape: circle
+      radius: 38
+      pupil_radius: 14
+      blink: false
+    mouth:
+      type: waveform
+      amplitude: 40
+      frequency: 4.0
+      points: 128
+
+  squint:
+    eyes:
+      shape: ellipse
+      width: 60
+      height: 20
+      pupil_radius: 10
+      blink: false
+    mouth:
+      type: flat
+      amplitude: 2
+      frequency: 0.2
+      points: 64
+
+  sleep:
+    eyes:
+      shape: line
+      width: 60
+      blink: false
+    mouth:
+      type: flat
+      amplitude: 3
+      frequency: 0.1
+      points: 32
+
+  happy:
+    eyes:
+      shape: circle
+      radius: 42
+      pupil_radius: 16
+      blink: true
+    mouth:
+      type: arc
+      amplitude: 15
+      frequency: 1.5
+      points: 64
+
+  surprised:
+    eyes:
+      shape: circle
+      radius: 55
+      pupil_radius: 25
+      blink: false
+    mouth:
+      type: oval
+      width: 40
+      height: 30
