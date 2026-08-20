@@ -173,3 +173,11 @@ class FaceRenderer:
 
     def set_pupil_target(self, dx: float, dy: float):
         self._pupil_target = [dx, dy]
+
+    def get_mouth_phase(self) -> float:
+        return self._osc_phase
+
+    def set_mouth_amplitude(self, amp: float):
+        expr = self._expressions.get(self.current_expression, {})
+        mouth = expr.get("mouth", {})
+        mouth["amplitude"] = max(0, min(80, amp))
