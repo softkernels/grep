@@ -181,3 +181,14 @@ class FaceRenderer:
         expr = self._expressions.get(self.current_expression, {})
         mouth = expr.get("mouth", {})
         mouth["amplitude"] = max(0, min(80, amp))
+
+    def track_point(self, norm_x: float, norm_y: float):
+        """move pupil toward normalized screen point (0-1)"""
+        dx = (norm_x - 0.5) * 60
+        dy = (norm_y - 0.5) * 40
+        self.set_pupil_target(dx, dy)
+
+    def blink_now(self):
+        self._blink_state = True
+        self._blink_timer = 0
+        self._last_blink = 0  # reset timer
