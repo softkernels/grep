@@ -93,6 +93,15 @@ class GrepCore:
             self.face.tick()
             await asyncio.sleep(1.0 / self.config["face"]["fps"])
 
+    async def _proximity_react(self, dist: float):
+        if dist < 20:
+            self.face.set_expression("alert")
+            self.voice.speak("hello there.", block=False)
+        elif dist < 40:
+            self.face.set_expression("curious")
+        else:
+            self.face.set_expression("idle")
+
     async def _sensor_loop(self):
         interval = 1.0 / self.config["sensor"].get("sample_rate", 10)
         while self._running:
