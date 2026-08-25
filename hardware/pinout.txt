@@ -1,0 +1,61 @@
+grep - raspberry pi 5 pinout reference
+======================================
+
+GPIO USAGE
+----------
+GPIO 17 (pin 11)  - IR sensor GP2Y0A21YK0F output (via ADC)
+GPIO 8  (pin 24)  - SPI CE0 (MCP3008 ADC chip select)
+GPIO 11 (pin 23)  - SPI CLK
+GPIO 10 (pin 19)  - SPI MOSI
+GPIO 9  (pin 21)  - SPI MISO
+
+I2C (bus 1)
+----------
+SDA - GPIO 2 (pin 3)
+SCL - GPIO 3 (pin 5)
+Device: PCA9685 @ 0x40
+
+UART
+----
+TX  - GPIO 14 (pin 8)  -> ESP32-C3 RX
+RX  - GPIO 15 (pin 10) -> ESP32-C3 TX
+/dev/ttyUSB0 when using USB-UART adapter
+/dev/ttyAMA0 when using hardware uart
+
+HDMI
+----
+HDMI-0 -> 7" 1024x600 LCD display (face renderer)
+
+POWER
+-----
+Pi 5 via USB-C PD (5V/5A)
+PCA9685 V+ -> 5V servo power rail (separate 5V BEC)
+IR sensor  -> 5V (pin 2 or 4)
+ESP32-C3   -> 3.3V or USB-powered
+
+PCA9685 CHANNEL MAP
+-------------------
+ch 0 - left arm  shoulder servo
+ch 1 - left arm  claw servo
+ch 2 - right arm shoulder servo
+ch 3 - right arm claw servo
+ch 4-15 - reserved
+
+SERVO SPECS
+-----------
+type:   MG996R (metal gear, 180 deg)
+signal: 50hz PWM
+pulse:  500us (0 deg) - 2500us (180 deg)
+power:  4.8-7.2V (run at 6V from BEC)
+
+IR SENSOR SPECS
+---------------
+model: GP2Y0A21YK0F
+range: 10-80cm
+output: analog voltage (0.4-3.1V)
+adc:   MCP3008 SPI @ ch 0
+supply: 5V
+
+I2C ADDRESSES
+-------------
+0x40 - PCA9685 servo driver (default, A0-A5 all low)
