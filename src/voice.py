@@ -94,3 +94,13 @@ class Voice:
 
     def shutdown(self):
         pass
+
+    def cache_stats(self) -> dict:
+        files = list(self.cache_dir.glob("*.mp3"))
+        total = sum(f.stat().st_size for f in files)
+        return {"count": len(files), "bytes": total}
+
+    def evict_oldest(self, keep: int = 100):
+        files = sorted(self.cache_dir.glob("*.mp3"), key=lambda f: f.stat().st_mtime)
+        for f in files[:-keep]:
+            f.unlink()
