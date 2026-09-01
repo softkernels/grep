@@ -112,3 +112,17 @@ class Memory:
     def close(self):
         if self._conn:
             self._conn.close()
+
+    def search(self, query: str, limit: int = 10) -> list:
+        c = self._conn.cursor()
+        c.execute(
+            "SELECT role, content, agent, ts FROM transmissions "
+            "WHERE content LIKE ? ORDER BY ts DESC LIMIT ?",
+            (f"%{query}%", limit),
+        )
+        return [{"role": r[0], "content": r[1], "agent": r[2], "ts": r[3]} for r in c.fetchall()]
+
+    def count(self) -> int:
+        c = self._conn.cursor()
+        c.execute("SELECT COUNT(*) FROM transmissions")
+        return c.fetchone()[0]
