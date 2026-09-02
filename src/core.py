@@ -89,8 +89,14 @@ class GrepCore:
         await asyncio.gather(idle_task, sensor_task)
 
     async def _idle_loop(self):
+        idle_count = 0
         while self._running:
             self.face.tick()
+            idle_count += 1
+            if idle_count % (self.config["face"]["fps"] * 60) == 0:
+                # every ~60s in idle, murmur something
+                if not self.voice.is_speaking():
+                    self.voice.speak("still watching.", block=False)
             await asyncio.sleep(1.0 / self.config["face"]["fps"])
 
     async def _proximity_react(self, dist: float):
