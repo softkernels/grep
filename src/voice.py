@@ -24,7 +24,7 @@ class Voice:
 
     def _cache_path(self, text: str) -> Path:
         # hash includes voice_id to prevent collision across voices
-        key = f"{self.voice_id}:{text}"
+        key = f"{self.voice_id}:{self.model}:{text}"
         h = hashlib.sha256(key.encode()).hexdigest()[:16]
         return self.cache_dir / f"{h}.mp3"
 
