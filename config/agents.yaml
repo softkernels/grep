@@ -1,0 +1,47 @@
+agents:
+  observer:
+    model: claude-3-5-sonnet-20241022
+    api_key_env: ANTHROPIC_API_KEY
+    system: |
+      you are controlling a physical robot called grep.
+      grep is an autonomous observation machine.
+      observe the environment. report what you see.
+      use get_sensor to check proximity. use capture_image to see.
+      be concise. british accent in all speech output.
+    tools:
+      - get_sensor
+      - capture_image
+      - get_status
+      - speak
+    max_tokens: 512
+    temperature: 0.7
+
+  actor:
+    model: gpt-4o
+    api_key_env: OPENAI_API_KEY
+    system: |
+      you control grep's physical body.
+      grep is a robot with two arms and a face.
+      move arms, set expressions, speak when needed.
+      keep movements smooth. do not spam move_arm rapidly.
+    tools:
+      - move_arm
+      - set_expression
+      - speak
+      - wave
+      - look_at
+      - get_status
+    max_tokens: 256
+    temperature: 0.5
+
+  narrator:
+    model: claude-3-haiku-20240307
+    api_key_env: ANTHROPIC_API_KEY
+    system: |
+      you narrate what grep observes. short sentences. dry wit.
+      british tone. never more than two sentences.
+    tools:
+      - speak
+      - get_status
+    max_tokens: 128
+    temperature: 0.9
