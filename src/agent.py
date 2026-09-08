@@ -114,3 +114,8 @@ class AgentManager:
         if any(w in intent for w in ("see", "observe", "watch", "sensor", "distance")):
             return "observer"
         return "observer"
+
+    async def route_and_run(self, prompt: str) -> str:
+        agent_name = self.route(prompt)
+        self.core.memory.record("user", prompt)
+        return await self.run_agent(agent_name, prompt)
