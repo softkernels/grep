@@ -119,3 +119,12 @@ class AgentManager:
         agent_name = self.route(prompt)
         self.core.memory.record("user", prompt)
         return await self.run_agent(agent_name, prompt)
+
+PERSONALITY_NOTES = {
+    "observer": "analytical. dry. reports facts without embellishment.",
+    "actor": "precise. minimal. moves things when needed.",
+    "narrator": "sardonic. british. two sentences max.",
+}
+
+def describe_agent(name: str) -> str:
+    return PERSONALITY_NOTES.get(name, "unknown agent")
