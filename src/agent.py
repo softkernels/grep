@@ -35,6 +35,7 @@ class AgentManager:
         temperature = cfg.get("temperature", 0.7)
         api_key_env = cfg.get("api_key_env", "ANTHROPIC_API_KEY")
 
+        # seed from persistent memory if no in-process history
         if agent_name not in self._history:
             self._history[agent_name] = []
 

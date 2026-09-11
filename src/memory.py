@@ -126,3 +126,15 @@ class Memory:
         c = self._conn.cursor()
         c.execute("SELECT COUNT(*) FROM transmissions")
         return c.fetchone()[0]
+
+    def get_context_for_agent(self, agent: str, n: int = 10) -> list:
+        c = self._conn.cursor()
+        c.execute(
+            "SELECT role, content FROM transmissions "
+            "WHERE agent = ? OR agent IS NULL "
+            "ORDER BY ts DESC LIMIT ?",
+            (agent, n),
+        )
+        rows = c.fetchall()
+        rows.reverse()
+        return [{"role": r[0], "content": r[1]} for r in rows]
