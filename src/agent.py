@@ -88,8 +88,11 @@ class AgentManager:
     def _trim_history(self, agent_name: str):
         h = self._history[agent_name]
         if len(h) > self._max_history:
-            # keep system-level context, drop oldest pairs
-            self._history[agent_name] = h[-(self._max_history):]
+            # drop oldest pairs (keep even count for role balance)
+            drop = len(h) - self._max_history
+            if drop % 2 != 0:
+                drop += 1
+            self._history[agent_name] = h[drop:]
 
     def get_history(self, agent_name: str) -> list:
         return self._history.get(agent_name, [])
