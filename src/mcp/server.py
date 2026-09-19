@@ -54,3 +54,11 @@ async def run_sse(core, host: str = "0.0.0.0", port: int = 8765):
     server = uvicorn.Server(config)
     log.info("mcp sse server on %s:%d", host, port)
     await server.serve()
+
+
+async def run_all(core, host: str = "0.0.0.0", port: int = 8765):
+    """run core loop and mcp sse server concurrently"""
+    import asyncio
+    mcp_task = asyncio.create_task(run_sse(core, host=host, port=port))
+    core_task = asyncio.create_task(core.run())
+    await asyncio.gather(mcp_task, core_task)

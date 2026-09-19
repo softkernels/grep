@@ -58,7 +58,11 @@ class GrepCore:
         self.voice = Voice(self.config["voice"])
         self.memory = Memory(self.config["memory"])
         self.agents = AgentManager(self.config, self)
+        self._mcp_server = None
         log.info("grep ready")
+
+    def set_mcp_server(self, server):
+        self._mcp_server = server
 
     def get_state(self) -> dict:
         return {
