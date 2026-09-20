@@ -2,11 +2,15 @@ import asyncio
 import base64
 import logging
 import time
+from collections import defaultdict
 from mcp.server import Server
 from mcp.types import Tool, TextContent, ImageContent
 
 log = logging.getLogger(__name__)
 
+
+_last_move: dict = defaultdict(float)
+MOVE_RATE_LIMIT = 0.05  # min seconds between moves on same joint
 
 def register_tools(app: Server, core):
 
