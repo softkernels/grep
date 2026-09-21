@@ -176,3 +176,10 @@ async def _look_at(core, direction: str):
         "up": "alert", "down": "squint", "center": "idle",
     }
     core.face.set_expression(expr_map.get(direction, "idle"))
+
+
+async def queue_speak(core, texts: list):
+    """speak multiple phrases in sequence"""
+    for text in texts:
+        core.voice.speak(text, block=True)
+        await asyncio.sleep(0.1)
