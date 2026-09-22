@@ -183,3 +183,9 @@ async def queue_speak(core, texts: list):
     for text in texts:
         core.voice.speak(text, block=True)
         await asyncio.sleep(0.1)
+
+
+async def capture_thumbnail_b64(core) -> str:
+    data = core.camera.capture_thumbnail()
+    import base64
+    return base64.b64encode(data).decode("utf-8")
