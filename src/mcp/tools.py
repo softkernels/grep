@@ -142,16 +142,16 @@ def register_tools(app: Server, core):
             return [TextContent(type="text", text=f"unknown tool: {name}")]
 
 
-async def _wave_sequence(core):
+async def _wave_sequence(core, reps: int = 3):
     core.face.set_expression("happy")
-    core.servo.move("left", "shoulder", 90)
-    await asyncio.sleep(0.3)
-    for _ in range(3):
-        core.servo.move("left", "claw", 30)
-        await asyncio.sleep(0.25)
-        core.servo.move("left", "claw", 80)
-        await asyncio.sleep(0.25)
-    core.servo.move("left", "shoulder", 90)
+    core.servo.move_smooth("left", "shoulder", 130, steps=8)
+    await asyncio.sleep(0.2)
+    for _ in range(reps):
+        core.servo.move("left", "claw", 25)
+        await asyncio.sleep(0.2)
+        core.servo.move("left", "claw", 85)
+        await asyncio.sleep(0.2)
+    core.servo.move_smooth("left", "shoulder", 90, steps=8)
     core.servo.move("left", "claw", 60)
     core.face.set_expression("idle")
 
