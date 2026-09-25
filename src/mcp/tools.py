@@ -158,12 +158,13 @@ async def _wave_sequence(core, reps: int = 3):
 
 async def _look_at(core, direction: str):
     # shoulder controls left/right facing; claw adjusts up/down tilt
+    # shoulder angle targets per direction
     angles = {
-        "left": ("left", "shoulder", 130),
-        "right": ("right", "shoulder", 130),
-        "up": ("left", "shoulder", 60),
-        "down": ("left", "shoulder", 120),
-        "center": ("left", "shoulder", 90),
+        "left":   ("left",  "shoulder", 135),
+        "right":  ("right", "shoulder", 135),
+        "up":     ("left",  "shoulder",  50),
+        "down":   ("left",  "shoulder", 140),
+        "center": ("left",  "shoulder",  90),
     }
     if direction in angles:
         arm, joint, angle = angles[direction]
