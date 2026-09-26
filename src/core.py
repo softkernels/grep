@@ -65,16 +65,15 @@ class GrepCore:
         self._mcp_server = server
 
     def get_state(self) -> dict:
+        import time
         return {
+            "ts": time.time(),
             "sensor_distance": self.sensor.read() if self.sensor else None,
-            "servo_angles": {
-                "left_shoulder": self.servo.get_angle("left", "shoulder"),
-                "left_claw": self.servo.get_angle("left", "claw"),
-                "right_shoulder": self.servo.get_angle("right", "shoulder"),
-                "right_claw": self.servo.get_angle("right", "claw"),
-            } if self.servo else {},
+            "servo_angles": self.servo.get_all_angles() if self.servo else {},
             "expression": self.face.current_expression if self.face else None,
             "speaking": self.voice.is_speaking() if self.voice else False,
+            "memory_count": self.memory.count() if self.memory else 0,
+            "voice_cache": self.voice.cache_stats() if self.voice else {},
         }
 
     async def run(self):
