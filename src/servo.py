@@ -58,11 +58,19 @@ class ServoController:
         max_a = arm_cfg.get(f"{joint}_max", 180)
         angle = max(min_a, min(max_a, angle))
 
-        # jitter suppression
+        # jitter suppression with per-channel cooldown
         threshold = self.config.get("jitter_threshold", 2)
         last = self._last_angles.get(key, -999)
         if abs(angle - last) < threshold:
             return True
+        import time as _time
+        cooldown_key = f"_cd_{key}"
+        last_move_t = getattr(self, cooldown_key, 0)
+        now = _time.monotonic()
+        min_interval = self.config.get("move_delay", 0.02)
+        if now - last_move_t < min_interval:
+            _time.sleep(min_interval - (now - last_move_t))
+        setattr(self, cooldown_key, _time.monotonic())
 
         self.servos[key].angle = angle
         self._last_angles[key] = angle
