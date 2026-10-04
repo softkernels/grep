@@ -59,3 +59,16 @@ supply: 5V
 I2C ADDRESSES
 -------------
 0x40 - PCA9685 servo driver (default, A0-A5 all low)
+
+SPI TIMING
+----------
+mcp3008 max clock: 3.6 MHz at 5V, 1.35 MHz at 2.7V
+pi spi default: 500 KHz (safe for 3.3V vref setup)
+set in /boot/config.txt: dtparam=spi=on
+
+I2C SPEED
+---------
+default 100kHz (standard mode)
+fast mode: add to /boot/config.txt:
+  dtparam=i2c_arm=on,i2c_arm_baudrate=400000
+pca9685 supports up to 1MHz
