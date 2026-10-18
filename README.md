@@ -123,6 +123,11 @@ client.connect()
 
 see `examples/` for claude, gpt-4, and multi-agent setups.
 
+run with env vars:
+```bash
+GREP_HOST=raspberrypi.local python examples/connect_claude.py
+```
+
 ---
 
 built by [@softkernels](https://github.com/softkernels)
