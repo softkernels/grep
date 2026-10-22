@@ -52,8 +52,8 @@ expressions:
     eyes:
       shape: ellipse
       width: 60
-      height: 20
-      pupil_radius: 10
+      height: 18
+      pupil_radius: 8
       blink: false
     mouth:
       type: flat
