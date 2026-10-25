@@ -1,3 +1,4 @@
+__all__ = ['IRSensor']
 import time
 import logging
 import RPi.GPIO as GPIO
