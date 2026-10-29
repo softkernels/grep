@@ -131,3 +131,7 @@ GREP_HOST=raspberrypi.local python examples/connect_claude.py
 ---
 
 built by [@softkernels](https://github.com/softkernels)
+
+## license
+
+mit. see [LICENSE](LICENSE).
